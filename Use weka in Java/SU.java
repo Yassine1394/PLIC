@@ -3,12 +3,6 @@ import weka.core.*;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
 
-/**
- * performs attribute selection using CfsSubsetEval and GreedyStepwise
- * (backwards) and trains J48 with that. Needs 3.5.5 or higher to compile.
- *
- * @author FracPete (fracpete at waikato dot ac dot nz)
- */
 public class SU {
 
   	/**

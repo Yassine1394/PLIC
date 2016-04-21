@@ -1,35 +1,31 @@
 import weka.attributeSelection.*;
 import weka.core.*;
-import weka.core.converters.ConverterUtils.DataSource;
+import java.io.FileWriter;
 import weka.filters.Filter;
 import weka.core.converters.CSVLoader;
 import java.io.File;
-/**
- * performs attribute selection using CfsSubsetEval and GreedyStepwise
- * (backwards) and trains J48 with that. Needs 3.5.5 or higher to compile.
- *
- * @author FracPete (fracpete at waikato dot ac dot nz)
- */
-public class CSV2SU {
+import java.io.IOException;
+import java.util.Arrays;
 
-  	/**
-  	 * print double array ds
-  	 * @param ds
-  	 */
-  	public static void printArray(double[] ds) {
-        System.out.println(ds.length);
-    //		for (Double element : ds){
-    //		    System.out.printf("%s ", element);
-    //		    System.out.println();
-    //		}
-  	}
-  	
+public class CSV2SU {
+	
+	//Delimiter used in CSV file
+	private static final String COMMA_DELIMITER = ",";
+	private static final String NEW_LINE_SEPARATOR = "\n";
+	
+	// number of features to be selected
+	private static final int res_features = 100;
+	// indices of selected features
+	private static int[] f_index;
+	// the value of all instances in data for a particular attribute
+	private static double[] ds;
+  
     /**
      * uses the filter
      */
     protected static void useFilter(Instances data) throws Exception {
   	  
-        System.out.println("\nDiscretize data.");    
+        //System.out.println("\nDiscretize data.");    
         weka.filters.unsupervised.attribute.Discretize discretize = new weka.filters.unsupervised.attribute.Discretize();
         discretize.setFindNumBins(true);
         discretize.setInputFormat(data);
@@ -38,7 +34,7 @@ public class CSV2SU {
         SymmetricalUncertAttributeEval eval = new SymmetricalUncertAttributeEval();
         Ranker search = new Ranker();
         search.setGenerateRanking(true);
-        search.setNumToSelect(100);
+        search.setNumToSelect(res_features);
         search.setThreshold(-1.7976931348623157E308);
         
         weka.filters.supervised.attribute.AttributeSelection filter = new weka.filters.supervised.attribute.AttributeSelection();
@@ -46,19 +42,52 @@ public class CSV2SU {
         filter.setSearch(search);
         filter.setInputFormat(dis_data);
         
-        System.out.println("\nUse SU rank and select features.");
+        //System.out.println("\nUse SU rank and select features.");
         Instances newData = Filter.useFilter(dis_data, filter);
+        
+        int i, j;
+        f_index = new int[res_features];
+        for (i = 0; i < res_features; ++i)
+			f_index[i] = dis_data.attribute(newData.attribute(i).name()).index();
+        Arrays.sort(f_index);
+        FileWriter fileWriter = null;
+        
+        try {
+        	fileWriter = new FileWriter("data\\SRBCT_f.csv");
+            fileWriter.append("label");
+            fileWriter.append(COMMA_DELIMITER);
 
-        System.out.println(newData.numAttributes());
-
-        //System.out.println(newData.relationName());
-        //System.out.println(data.classAttribute());
-        for (int i = 0; i < 100; ++i) {
-        //System.out.println(newData.attribute(i).index());
-        	  printArray(newData.attributeToDoubleArray(i));
-        }
-        System.out.println(newData.numInstances());
-        System.out.println("Finished!");
+            ds = data.attributeToDoubleArray(data.classIndex());
+            for (i = 0; i < data.numInstances(); ++i) {
+            	fileWriter.append(String.valueOf(ds[i]));
+            	fileWriter.append(COMMA_DELIMITER);
+            }
+			fileWriter.append(NEW_LINE_SEPARATOR);
+			
+			for (i = 0; i < res_features; ++i) {
+				ds = data.attributeToDoubleArray(f_index[i]);
+				
+				fileWriter.append(String.valueOf(f_index[i] + 1));
+				fileWriter.append(COMMA_DELIMITER);
+				
+				for (j = 0; j < data.numInstances(); ++j) {
+	            	fileWriter.append(String.valueOf(ds[j]));
+	            	fileWriter.append(COMMA_DELIMITER);
+	            }
+				fileWriter.append(NEW_LINE_SEPARATOR);
+			}
+		} catch (Exception e) {
+			//System.out.println("Error in CsvFileWriter !!!");
+			e.printStackTrace();
+		} finally {
+			try {
+				fileWriter.flush();
+				fileWriter.close();
+			} catch (IOException e) {
+                e.printStackTrace();
+			}
+		}
+        
     }
 
     /**
@@ -69,7 +98,7 @@ public class CSV2SU {
      */
     public static void main(String[] args) throws Exception {
         // load data
-        System.out.println("\n0. Loading data");
+        //System.out.println("\n0. Loading data");
         // load CSV
         CSVLoader loader = new CSVLoader();
         loader.setSource(new File(args[0]));

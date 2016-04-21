@@ -10,25 +10,29 @@ http://weka.sourceforge.net/doc.dev/
 
 #### compile method
 
+``` 
 javac -cp ";./jar/weka-3.6.10.jar" SU.java
 
 javac -cp ";./jar/weka.jar" CSV2Arff.java
 
 javac -cp ";./jar/weka.jar" CSV2SU.java
+``` 
 
 #### run method
 
+``` 
 java -cp ";./jar/weka-3.6.10.jar" SU SRBCT.arff
 
 java -cp ";./jar/weka.jar" CSV2Arff SRBCT.csv SRBCT2.arff
 
 java -cp ";./jar/weka.jar" CSV2SU SRBCT.csv
+``` 
 
-> java -cp ";./jar/weka.jar" weka.core.converters.CSVLoader SRBCT.csv > SRBCT2.arff
-
-File CSV2Arff.java doesn't work well(error below), but command above.
+File CSV2Arff.java doesn't work well(error below), but command work.
 
 ``` 
+java -cp ";./jar/weka.jar" weka.core.converters.CSVLoader SRBCT.csv > SRBCT2.arff
+
 java -cp ";./weka.jar" CSV2Arff SRBCT.csv SRBCT2.arff
 Cannot create a new output file. Standard out is used.
 Exception in thread "main" java.io.IOException: Cannot create a new output file (Reason: java.io.IOException: File already exists.). Standard out is used.
