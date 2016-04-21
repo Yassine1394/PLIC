@@ -28,11 +28,12 @@ java -cp ";./jar/weka.jar" CSV2Arff SRBCT.csv SRBCT2.arff
 java -cp ";./jar/weka.jar" CSV2SU SRBCT.csv
 ``` 
 
-File CSV2Arff.java doesn't work well(error below), but command work.
+```
+java -cp ";./jar/weka.jar" weka.core.converters.CSVLoader SRBCT.csv > SRBCT2.arff
+```
+File CSV2Arff.java doesn't work well(error below), but command work(above!).
 
 ``` 
-java -cp ";./jar/weka.jar" weka.core.converters.CSVLoader SRBCT.csv > SRBCT2.arff
-
 java -cp ";./weka.jar" CSV2Arff SRBCT.csv SRBCT2.arff
 Cannot create a new output file. Standard out is used.
 Exception in thread "main" java.io.IOException: Cannot create a new output file (Reason: java.io.IOException: File already exists.). Standard out is used.
