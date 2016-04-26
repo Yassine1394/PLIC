@@ -54,3 +54,5 @@ java -cp ";./jar/weka.jar" jar.CSV2SU ./jar/SRBCT.csv
 ```
 
 If you use C++ in windows, you shoule include **"windows.h"**, then use **system("javac -cp \";./jar/weka.jar\" jar/CSV2SU.java");**.
+
+Also may have a problem: **"'Java' is not recognized as an internal or external command" !** Because, I update Java version in a computer and reset the path. The system(...) didn't work untile I reboot the computer(in cmd u have to do is just restart the cmd).
