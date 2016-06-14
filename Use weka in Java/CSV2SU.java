@@ -9,16 +9,16 @@ import java.util.Arrays;
 
 public class CSV2SU {
 	
-	//Delimiter used in CSV file
-	private static final String COMMA_DELIMITER = ",";
-	private static final String NEW_LINE_SEPARATOR = "\n";
-	
-	// number of features to be selected
-	private static final int res_features = 100;
-	// indices of selected features
-	private static int[] f_index;
-	// the value of all instances in data for a particular attribute
-	private static double[] ds;
+    //Delimiter used in CSV file
+    private static final String COMMA_DELIMITER = ",";
+    private static final String NEW_LINE_SEPARATOR = "\n";
+    	
+    // number of features to be selected
+    private static final int res_features = 100;
+    // indices of selected features
+    private static int[] f_index;
+    // the value of all instances in data for a particular attribute
+    private static double[] ds;
   
     /**
      * uses the filter
@@ -53,7 +53,7 @@ public class CSV2SU {
         FileWriter fileWriter = null;
         
         try {
-        	fileWriter = new FileWriter("data\\SRBCT_f.csv");
+            fileWriter = new FileWriter("data\\SRBCT_f.csv");
             fileWriter.append("label");
             fileWriter.append(COMMA_DELIMITER);
 
@@ -62,31 +62,34 @@ public class CSV2SU {
             	fileWriter.append(String.valueOf(ds[i]));
             	fileWriter.append(COMMA_DELIMITER);
             }
-			fileWriter.append(NEW_LINE_SEPARATOR);
-			
-			for (i = 0; i < res_features; ++i) {
-				ds = data.attributeToDoubleArray(f_index[i]);
-				
-				fileWriter.append(String.valueOf(f_index[i] + 1));
-				fileWriter.append(COMMA_DELIMITER);
-				
-				for (j = 0; j < data.numInstances(); ++j) {
-	            	fileWriter.append(String.valueOf(ds[j]));
-	            	fileWriter.append(COMMA_DELIMITER);
-	            }
-				fileWriter.append(NEW_LINE_SEPARATOR);
-			}
-		} catch (Exception e) {
-			//System.out.println("Error in CsvFileWriter !!!");
-			e.printStackTrace();
-		} finally {
-			try {
-				fileWriter.flush();
-				fileWriter.close();
-			} catch (IOException e) {
+            fileWriter.append(NEW_LINE_SEPARATOR);
+
+            for (i = 0; i < res_features; ++i) {
+                ds = data.attributeToDoubleArray(f_index[i]);
+
+                fileWriter.append(String.valueOf(f_index[i] + 1));
+                fileWriter.append(COMMA_DELIMITER);
+
+            	for (j = 0; j < data.numInstances(); ++j) {
+                	fileWriter.append(String.valueOf(ds[j]));
+                	fileWriter.append(COMMA_DELIMITER);
+                }
+            	fileWriter.append(NEW_LINE_SEPARATOR);
+            }
+
+        } catch (Exception e) {
+            //System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+
+            try {
+            	fileWriter.flush();
+            	fileWriter.close();
+            } catch (IOException e) {
                 e.printStackTrace();
-			}
-		}
+            }
+            
+        }
         
     }
 

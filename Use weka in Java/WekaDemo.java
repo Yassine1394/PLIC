@@ -157,81 +157,81 @@ public class WekaDemo {
      *     DATASET iris.arff<br/>
      */
     public static void main(String[] args) throws Exception {
-      WekaDemo         demo;
+        WekaDemo demo;
 
-      if (args.length < 6) {
+        if (args.length < 6) {
           System.out.println(WekaDemo.usage());
           System.exit(1);
-      }
-
-      // parse command line
-      String classifier = "";
-      String filter = "";
-      String dataset = "";
-      Vector<String> classifierOptions = new Vector<String>();
-      Vector<String> filterOptions = new Vector<String>();
-
-      int i = 0;
-      String current = "";
-      boolean newPart = false;
-      do {
-          // determine part of command line
-          if (args[i].equals("CLASSIFIER")) {
-              current = args[i];
-              i++;
-              newPart = true;
         }
-        else if (args[i].equals("FILTER")) {
-            current = args[i];
+
+        // parse command line
+        String classifier = "";
+        String filter = "";
+        String dataset = "";
+        Vector<String> classifierOptions = new Vector<String>();
+        Vector<String> filterOptions = new Vector<String>();
+
+        int i = 0;
+        String current = "";
+        boolean newPart = false;
+        do {
+            // determine part of command line
+            if (args[i].equals("CLASSIFIER")) {
+                current = args[i];
+                i++;
+                newPart = true;
+            }
+            else if (args[i].equals("FILTER")) {
+                current = args[i];
+                i++;
+                newPart = true;
+            }
+            else if (args[i].equals("DATASET")) {
+                current = args[i];
+                i++;
+                newPart = true;
+            }
+
+            if (current.equals("CLASSIFIER")) {
+                if (newPart)
+                    classifier = args[i];
+                else
+                    classifierOptions.add(args[i]);
+            }
+            else if (current.equals("FILTER")) {
+                if (newPart)
+                    filter = args[i];
+                else
+                    filterOptions.add(args[i]);
+            }
+            else if (current.equals("DATASET")) {
+                if (newPart)
+                    dataset = args[i];
+            }
+
+            // next parameter
             i++;
-            newPart = true;
-        }
-        else if (args[i].equals("DATASET")) {
-            current = args[i];
-            i++;
-            newPart = true;
+            newPart = false;
+        } 
+        while (i < args.length);
+
+        // everything provided?
+        if ( classifier.equals("") || filter.equals("") || dataset.equals("") ) {
+            System.out.println("Not all parameters provided!");
+            System.out.println(WekaDemo.usage());
+            System.exit(2);
         }
 
-        if (current.equals("CLASSIFIER")) {
-            if (newPart)
-                classifier = args[i];
-            else
-                classifierOptions.add(args[i]);
-        }
-        else if (current.equals("FILTER")) {
-            if (newPart)
-                filter = args[i];
-            else
-                filterOptions.add(args[i]);
-        }
-        else if (current.equals("DATASET")) {
-            if (newPart)
-                dataset = args[i];
-        }
-
-          // next parameter
-          i++;
-          newPart = false;
-      } 
-      while (i < args.length);
-
-      // everything provided?
-      if ( classifier.equals("") || filter.equals("") || dataset.equals("") ) {
-          System.out.println("Not all parameters provided!");
-          System.out.println(WekaDemo.usage());
-          System.exit(2);
-      }
-
-      // run
-      demo = new WekaDemo();
-      demo.setClassifier(
-          classifier, 
-          (String[]) classifierOptions.toArray(new String[classifierOptions.size()]));
-      demo.setFilter(
-          filter,
-          (String[]) filterOptions.toArray(new String[filterOptions.size()]));
-      demo.setTraining(dataset);
-      demo.execute();
-      System.out.println(demo.toString());
+        // run
+        demo = new WekaDemo();
+        demo.setClassifier(
+            classifier, 
+            (String[]) classifierOptions.toArray(new String[classifierOptions.size()]));
+        demo.setFilter(
+            filter,
+            (String[]) filterOptions.toArray(new String[filterOptions.size()]));
+        demo.setTraining(dataset);
+        demo.execute();
+        System.out.println(demo.toString());
     }
 }

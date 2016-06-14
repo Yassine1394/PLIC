@@ -8,11 +8,11 @@ public class TutorialDataLoader {
 
     public static void main(String[] args) throws Exception {
         Dataset data = FileHandler.loadDataset(new File("data/iris.data"), 4, ",");
-//        System.out.println(data);
-        
-//        data = FileHandler.loadSparseDataset(new File("data/sparse.tsv"), 0, " ", ":");
-//        System.out.println(data);
-//        FileHandler.exportDataset(data, new File("output.txt"));
+        // System.out.println(data);
+
+        // data = FileHandler.loadSparseDataset(new File("data/sparse.tsv"), 0, " ", ":");
+        // System.out.println(data);
+        // FileHandler.exportDataset(data, new File("output.txt"));
         
         GainRatio ga = new GainRatio();
         /* Apply the algorithm to the data set */

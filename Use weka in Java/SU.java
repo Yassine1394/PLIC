@@ -5,17 +5,17 @@ import weka.filters.Filter;
 
 public class SU {
 
-  	/**
-  	 * print double array ds
-  	 * @param ds
-  	 */
-  	public static void printArray(double[] ds) {
-    	System.out.println(ds.length);
-    //		for (Double element : ds){
-    //		    System.out.printf("%s ", element);
-    //		    System.out.println();
-    //		}
-  	}
+    /**
+     * print double array ds
+     * @param ds
+     */
+    public static void printArray(double[] ds) {
+    System.out.println(ds.length);
+        for (Double element : ds){
+            System.out.printf("%s ", element);
+            System.out.println();
+        }
+    }
   	
     /**
      * uses the filter
@@ -44,11 +44,11 @@ public class SU {
 
         System.out.println(newData.numAttributes());
 
-    //    System.out.println(newData.relationName());
-    //    System.out.println(data.classAttribute());
+        System.out.println(newData.relationName());
+        System.out.println(data.classAttribute());
         for (int i = 0; i < 100; ++i) {
-    //    	System.out.println(newData.attribute(i).index());
-        	  printArray(newData.attributeToDoubleArray(i));
+            System.out.println(newData.attribute(i).index());
+            printArray(newData.attributeToDoubleArray(i));
         }
         System.out.println(newData.numInstances());
         System.out.println("Finished!");
