@@ -36,8 +36,8 @@ public class CSV2Arff {
     */
     public static void main(String[] args) throws Exception {
         if (args.length != 2) {
-          System.out.println("\nUsage: CSV2Arff <input.csv> <output.arff>\n");
-          System.exit(1);
+            System.out.println("\nUsage: CSV2Arff <input.csv> <output.arff>\n");
+            System.exit(1);
         }
 
         // load CSV

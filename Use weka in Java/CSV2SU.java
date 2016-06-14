@@ -48,7 +48,7 @@ public class CSV2SU {
         int i, j;
         f_index = new int[res_features];
         for (i = 0; i < res_features; ++i)
-			f_index[i] = dis_data.attribute(newData.attribute(i).name()).index();
+            f_index[i] = dis_data.attribute(newData.attribute(i).name()).index();
         Arrays.sort(f_index);
         FileWriter fileWriter = null;
         
