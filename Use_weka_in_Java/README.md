@@ -1,4 +1,4 @@
-In my project, for weka CSV2SU.java and CSV2Arff.java referenced jar/weka.jar, the others referenced jar/weka-3.6.10.jar.
+In my project, for weka CSV2SU.java, CSV2Arff.java and DiscretizeData.java referenced jar/weka.jar, the others referenced jar/weka-3.6.10.jar.
 
 #### Use weka in Java
 
@@ -45,7 +45,7 @@ Exception in thread "main" java.io.IOException: Cannot create a new output file 
 
 ### What's more
 
-If file CSV2SU.java and SRBCT.csv are under folder jar, and we want compile and run at current dir(Use weka in Java). Firstly, we shoule add **package jar;** in the top of file CSV2SU.java. And then:
+If file CSV2SU.java and SRBCT.csv are under folder jar, and we want compile and run at current dir(Use weka in Java). **Firstly**, we shoule add **package jar;** in the top of file CSV2SU.java. And then:
 
 ```
 javac -cp ";./jar/weka.jar" jar/CSV2SU.java
@@ -53,6 +53,6 @@ javac -cp ";./jar/weka.jar" jar/CSV2SU.java
 java -cp ";./jar/weka.jar" jar.CSV2SU ./jar/SRBCT.csv
 ```
 
-If you use C++ in windows, you shoule include **"windows.h"**, then use **system("javac -cp \";./jar/weka.jar\" jar/CSV2SU.java");**.
+If you use C++ in Windows, use **system("javac -cp \";./jar/weka.jar\" jar/CSV2SU.java");**.
 
 Also may have a problem: **"'Java' is not recognized as an internal or external command" !** Because, I update Java version in a computer and reset the path. The system(...) didn't work untile I reboot the computer(in cmd u have to do is just restart the cmd).

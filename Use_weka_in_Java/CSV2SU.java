@@ -71,8 +71,8 @@ public class CSV2SU {
                 fileWriter.append(COMMA_DELIMITER);
 
             	for (j = 0; j < data.numInstances(); ++j) {
-                	fileWriter.append(String.valueOf(ds[j]));
-                	fileWriter.append(COMMA_DELIMITER);
+                    fileWriter.append(String.valueOf(ds[j]));
+                    fileWriter.append(COMMA_DELIMITER);
                 }
             	fileWriter.append(NEW_LINE_SEPARATOR);
             }
