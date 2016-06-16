@@ -70,7 +70,7 @@ void TransposForDiscretize(char* filename)
     
     ofstream outt(filename);
     for (i = 0; i < r_col; ++i)
-        outt << i + 1 << ',';
+        outt << i << ',';
     outt << "label" << endl;
     for (i = 0; i < r_row; ++i)
     {
